@@ -1,0 +1,901 @@
+<html>
+	<head>
+		<title>BOLD</title>
+		<meta charset="UTF-8"/>
+		<script src="jquery.js"></script>
+		<script src="jsonld.js"></script>
+		<script src="viz.js"></script>
+		<!-- stuff below needs to go into CouchDB views -->
+		<script src="shared.js"></script>
+		<script src="language.js"></script>
+		<style>
+		td { border: 1px solid red; }
+		</style>
+	</head>
+<body>
+
+<h1>BOLD to JSON-LD</h1>
+
+<div>
+	<div style="width:100%;height:auto;">
+		<h2>JSON</h2>
+			<!-- JSON for data object goes below -->
+			<textarea id="json" style="width:100%;background-color:#224FBC;color:#FFFF66;" rows="20">{
+  "_id": "http://boldsystems.org/index.php/Public_RecordView?processid=ANICS568-11",
+  "_rev": "1-cc9eb62ff5415b83d005f452a48c4395",
+  "record_id": "1889311",
+  "processid": "ANICS568-11",
+  "bin_uri": "BOLD:ABZ2210",
+  "specimen_identifiers": {
+    "sampleid": "11ANIC-04568",
+    "catalognum": "ANIC Database No. 31 042406",
+    "fieldnum": "11ANIC-04568",
+    "institution_storing": "Australian National Insect Collection"
+  },
+  "taxonomy": {
+    "identification_provided_by": "ANIC Curators",
+    "phylum": {
+      "taxon": {
+        "taxID": "20",
+        "name": "Arthropoda"
+      }
+    },
+    "class": {
+      "taxon": {
+        "taxID": "82",
+        "name": "Insecta"
+      }
+    },
+    "order": {
+      "taxon": {
+        "taxID": "113",
+        "name": "Lepidoptera"
+      }
+    },
+    "family": {
+      "taxon": {
+        "taxID": "525",
+        "name": "Geometridae"
+      }
+    },
+    "subfamily": {
+      "taxon": {
+        "taxID": "5569",
+        "name": "Geometrinae"
+      }
+    },
+    "genus": {
+      "taxon": {
+        "taxID": "7217",
+        "name": "Pingasa"
+      }
+    },
+    "species": {
+      "taxon": {
+        "taxID": "18995",
+        "name": "Pingasa chlora",
+        "reference": "Stoll, 1752"
+      }
+    }
+  },
+  "specimen_desc": {
+    "voucher_status": "",
+    "reproduction": "S",
+    "lifestage": "A"
+  },
+  "collection_event": {
+    "collectors": "K.J.Sandery",
+    "country": "Australia",
+    "province_state": "Queensland",
+    "exactsite": "Bucasia Nth",
+    "coordinates": {
+      "lat": "-21.037",
+      "lon": "149.158",
+      "coord_source": "",
+      "coord_accuracy": ""
+    }
+  },
+  "specimen_imagery": {
+    "media": [
+      {
+        "mediaID": 1098120,
+        "media_descriptor": "Dorsal",
+        "copyright": {
+          "copyright_holder": "CSIRO/BIO Photography Group",
+          "copyright_year": "2011",
+          "copyright_license": "CreativeCommons - Attribution Non-Commercial Share-Alike",
+          "copyright_institution": "Centre for Biodiversity Genomics"
+        },
+        "photographer": "Jaclyn McCormick",
+        "image_file": "http://www.boldsystems.org/pics/ANICS/11ANIC_04568+1301474654.JPG"
+      }
+    ]
+  },
+  "tracefiles": {
+    "read": [
+      {
+        "trace_id": 3166351,
+        "run_date": "2011-06-28T01:50:00",
+        "sequencing_center": "Biodiversity Institute of Ontario",
+        "direction": "F",
+        "seq_primer": "MLepF1",
+        "trace_name": "ANICS568-11[MLepF1,LepR1]_F.ab1",
+        "trace_link": "http://trace.boldsystems.org/traceIO/bold.org/2830427",
+        "markercode": "COI-5P"
+      },
+      {
+        "trace_id": 3166394,
+        "run_date": "2011-06-28T03:15:52",
+        "sequencing_center": "Biodiversity Institute of Ontario",
+        "direction": "R",
+        "seq_primer": "LepR1",
+        "trace_name": "ANICS568-11[MLepF1,LepR1]_R.ab1",
+        "trace_link": "http://trace.boldsystems.org/traceIO/bold.org/2830470",
+        "markercode": "COI-5P"
+      },
+      {
+        "trace_id": 3166441,
+        "run_date": "2011-06-30T00:59:10",
+        "sequencing_center": "Biodiversity Institute of Ontario",
+        "direction": "R",
+        "seq_primer": "MLepR2",
+        "trace_name": "ANICS568-11[LepF1,MLepR2]_R.ab1",
+        "trace_link": "http://trace.boldsystems.org/traceIO/bold.org/2830517",
+        "markercode": "COI-5P"
+      },
+      {
+        "trace_id": 3166450,
+        "run_date": "2011-06-30T02:24:49",
+        "sequencing_center": "Biodiversity Institute of Ontario",
+        "direction": "F",
+        "seq_primer": "LepF1",
+        "trace_name": "ANICS568-11[LepF1,MLepR2]_F.ab1",
+        "trace_link": "http://trace.boldsystems.org/traceIO/bold.org/2830526",
+        "markercode": "COI-5P"
+      }
+    ]
+  },
+  "sequences": {
+    "sequence": [
+      {
+        "sequenceID": "4026163",
+        "markercode": "COI-5P",
+        "genbank_accession": "KF392630",
+        "nucleotides": "AACATTATATTTTATTTTTGGAATTTGAGCAGGAATAATTGGAACATCATTAAGTTTATTAATTCGGGCAGAATTAGGTAGCCCTGGATCCTTAATTGGAGATGATCAAATTTATAATACAATTGTAACAGCTCATGCATTTATTATAATTTTTTTTATAGTTATACCTATCATAATCGGAGGATTTGGAAATTGATTAGTCCCTTTAATATTGGGGGCCCCTGATATAGCTTTCCCACGAATAAATAACATAAGATTTTGATTATTACCCCCTTCTATTACTCTTTTAATTTCTAGAAGAATTGTAGAAAATGGAGCTGGAACAGGATGAACAGTTTACCCCCCTCTATCATCTAATATCGCCCATGGAGGAAGTTCTGTAGATTTAGCAATTTTTTCCCTCCATTTAGCGGGAATTTCTTCAATTTTAGGGGCCATTAATTTTATTACAACAATTATTAATATACGTCTTAATAACTTATCATTTGATCAAATACCACTTTTTATTTGAGCCGTAGGTATTACTGCTTTTTTACTTTTACTTTCATTACCTGTTTTAGCTGGAGCCATTACAATATTATTAACAGATCGAAATTTAAATACATCATTTTTTGACCCAGCTGGAGGAGGAGACCCAATTCTTTACCAACATTTATTC"
+      }
+    ]
+  },
+  "notes": ""
+}</textarea>
+
+			<br />
+			<button onclick="convert()">Convert JSON to RDF</button>
+	</div>
+	<div style="clear:both;"></div>
+	
+	<div style="width:100%;">
+		<h2>Triples</h2>
+		<div id="output" style="width:100%;background-color:#FF7;color:#222;overflow:auto;"></div>
+		<h2>Graph</h2>
+		<div id="graph" style="width:100%;overflow:auto;"></div>
+		<h2>JSON-LD</h2>
+		<div id="jsonld" style="width:100%;white-space:pre;background-color:#333;color:white;overflow:auto;"></div>
+
+</div>			
+			
+		
+		
+		
+<script>
+
+	
+//----------------------------------------------------------------------------------------
+// START COUCHDB VIEW
+
+//----------------------------------------------------------------------------------------
+// Return true if value is not empty, tests for strange stuff such as "[Not Stated]"
+function not_empty(value) {
+	var empty = true;
+	
+	if (!value) {
+		return false;
+	}
+
+	if (value == null) {
+		return false;
+	}
+
+	if (value.match(/\[Not Stated\]/i)) {
+		return false;
+	}
+	
+	return empty;
+
+
+}
+
+
+//----------------------------------------------------------------------------------------
+function message(doc) {
+
+    var triples = [];
+    
+    var base_id = doc._id;
+   
+       
+    // ids for nodes in graph
+    
+    // event
+    var event_id = base_id + '#event';
+	if (doc.eventID) {
+	  if (doc.eventID.match(/^(http[s]?|urn)/)) {
+		event_id = doc.eventID;
+	  }
+	}
+	
+	// location
+    var locality_id = base_id + '#location';
+
+	// occurrence
+	var occurrence_id = base_id + '#occurrence';
+	
+	// organism
+    var organism_id = base_id + '#organism';
+
+	// identification 
+    var identification_id = base_id + '#identification';
+ 
+	// specimen
+	var specimen_id = base_id + '#specimen';
+              
+    
+    //-------------------------record---------------------------------------------------
+
+
+	// name for occurrence
+	triples.push(triple(
+	  occurrence_id,
+	  'http://schema.org/name',
+	  doc.processid));
+
+    //-------------------------properties---------------------------------------------------
+    
+	// Darwin Core types
+	triples.push(triple(
+	  occurrence_id,
+	  'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+	  'http://rs.tdwg.org/dwc/terms/Occurrence'));
+	  
+	triples.push(triple(
+	  locality_id,
+	  'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+	  'http://purl.org/dc/terms/Location'));
+	  
+	triples.push(triple(
+	  event_id,
+	  'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+	  'http://rs.tdwg.org/dwc/terms/Event'));
+
+	triples.push(triple(
+	  organism_id,
+	  'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+	  'http://rs.tdwg.org/dwc/terms/Organism'));
+	  
+
+	triples.push(triple(
+	  identification_id,
+	  'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+	  'http://rs.tdwg.org/dwc/terms/Identification'));
+	  
+	  
+	// darwin core/rdf links 
+	
+	triples.push(triple(occurrence_id,
+	  'http://purl.org/dsw/atEvent',
+	  event_id));
+
+	triples.push(triple(event_id,
+	  'http://purl.org/dsw/locatedAt',
+	  locality_id));
+
+	triples.push(triple(occurrence_id,
+	  'http://purl.org/dsw/occurrenceOf',
+	  organism_id));
+	  
+	triples.push(triple(identification_id,
+	  'http://purl.org/dsw/identifies',
+	  organism_id));
+
+	triples.push(triple(specimen_id,
+	  'http://purl.org/dsw/isBasisForId',
+	identification_id));
+	  
+	  
+	  // BIN is taxon id
+	if (doc.bin_uri) {
+		triples.push(triple(identification_id,
+			'http://rs.tdwg.org/dwc/iri/toTaxon',
+		  'http://boldsystems.org/index.php/Public_BarcodeCluster?clusteruri=' + doc.bin_uri));
+		
+	}
+	
+	// specimen
+	if (doc.specimen_identifiers) {
+		for (var k in doc.specimen_identifiers) {
+			switch (k) {
+				case 'fieldnum':
+					triples.push(triple(specimen_id,
+					'http://rs.tdwg.org/dwc/terms/fieldNumber',
+					doc.specimen_identifiers[k]));			
+					break;
+
+				case 'catalognum':
+					triples.push(triple(specimen_id,
+					'http://rs.tdwg.org/dwc/terms/catalogNumber',
+					String(doc.specimen_identifiers[k])));			
+					break;
+
+				case 'sampleid':
+					triples.push(triple(specimen_id,
+					'http://rs.tdwg.org/dwc/terms/otherCatalogNumbers',
+					String(doc.specimen_identifiers[k])));			
+					break;
+
+				case 'institution_storing':
+					triples.push(triple(specimen_id,
+					'http://rs.tdwg.org/dwc/terms/institutionCode',
+					doc.specimen_identifiers[k]));			
+					break;
+					
+				default:
+					break;
+			}
+		}
+	}
+	
+	if (doc.specimen_desc) {
+		for (var k in doc.specimen_desc) {
+			if (doc.specimen_desc[k] != '') {
+				switch (k) {
+					case 'voucher_status':
+						triples.push(triple(specimen_id,
+						'http://rs.tdwg.org/dwc/terms/fieldNumber',
+						doc.specimen_desc[k]));			
+						break;
+
+					case 'reproduction':
+						triples.push(triple(specimen_id,
+						'http://rs.tdwg.org/dwc/terms/reproductiveCondition',
+						String(doc.specimen_desc[k])));			
+						break;
+
+					case 'lifestage':
+						triples.push(triple(specimen_id,
+						'http://rs.tdwg.org/dwc/terms/lifestage',
+						String(doc.specimen_desc[k])));			
+						break;
+
+					case 'sex':
+						triples.push(triple(specimen_id,
+						'http://rs.tdwg.org/dwc/terms/sex',
+						String(doc.specimen_desc[k])));			
+						break;
+
+					default:
+						break;
+				}
+			}
+		}
+	}	
+	
+	
+	// event / locality
+	if (doc.collection_event) {
+		for (var k in doc.collection_event) {
+			switch (k) {
+			
+				// event
+				case 'collectors':
+					triples.push(triple(event_id,
+					'http://rs.tdwg.org/dwc/terms/recordedBy',
+					doc.collection_event[k]));	
+					break;		
+				
+				// locality
+				
+				case 'elev':
+					triples.push(triple(locality_id,
+					'http://rs.tdwg.org/dwc/terms/minimumElevationInMeters',
+					doc.collection_event[k]));	
+							
+					triples.push(triple(locality_id,
+					'http://rs.tdwg.org/dwc/terms/maximumElevationInMeters',
+					doc.collection_event[k]));			
+					break;				
+				
+				case 'country':
+					triples.push(triple(locality_id,
+					'http://rs.tdwg.org/dwc/terms/country',
+					doc.collection_event[k]));			
+					break;
+					
+				case 'province_state':
+					triples.push(triple(locality_id,
+					'http://rs.tdwg.org/dwc/terms/stateProvince',
+					doc.collection_event[k]));			
+					break;
+
+				case 'exactsite':
+					triples.push(triple(locality_id,
+					'http://rs.tdwg.org/dwc/terms/locality',
+					doc.collection_event[k]));			
+					break;
+					
+				case 'coordinates':
+					if (doc.collection_event[k].lat) {
+						triples.push(triple(locality_id,
+						'http://rs.tdwg.org/dwc/terms/decimalLatitude',
+						doc.collection_event[k].lat));								
+					}
+					if (doc.collection_event[k].lon) {
+						triples.push(triple(locality_id,
+						'http://rs.tdwg.org/dwc/terms/decimalLongitude',
+						doc.collection_event[k].lon));								
+					}
+				
+					break;
+			
+				default:
+					break;
+			}
+		}
+	}
+	
+	// locality
+	
+	
+	// taxonomy
+	if (doc.taxonomy) {
+	
+		var scientificName = '';
+		
+		for (var k in doc.taxonomy) {
+			switch (k) {
+				case 'identification_provided_by':
+					triples.push(triple(identification_id,
+					'http://rs.tdwg.org/dwc/terms/identifiedBy',
+					doc.taxonomy[k]));			
+					break;
+					
+				case 'phylum':
+				case 'class':
+				case 'order':
+				case 'family':
+				case 'genus':
+				case 'subgenus':
+					triples.push(triple(identification_id,
+					'http://rs.tdwg.org/dwc/terms/' + k,
+					doc.taxonomy[k].taxon.name));
+					
+					scientificName = doc.taxonomy[k].taxon.name;	
+					break;		
+
+				// needs special handling
+				case 'species':
+					/*
+					triples.push(triple(identification_id,
+					'http://rs.tdwg.org/dwc/terms/' + k,
+					doc.taxonomy[k].taxon.name));	
+					*/
+					
+					scientificName = doc.taxonomy[k].taxon.name		
+				
+					break;
+					
+				case 'subspecies':
+					scientificName = doc.taxonomy[k].taxon.name
+					break;				
+					
+				
+				case 'subfamily':
+					break;				
+				
+				default:
+					break;
+			}		
+		
+		}
+		
+		if (scientificName != '') {
+			triples.push(triple(identification_id,
+			'http://rs.tdwg.org/dwc/terms/scientificName',
+			scientificName));	
+		
+		}
+	}	
+	
+	
+	// sequences
+	if (doc.sequences) {
+		if (doc.sequences.sequence) {
+			for (var i in doc.sequences.sequence) {
+			
+			  var sequence_id = base_id + '#' + doc.processid + '.' + doc.sequences.sequence[i].markercode;
+				
+			  // link to data
+			  triples.push(triple(sequence_id,
+				'http://purl.org/dsw/derivedFrom',
+				organism_id));
+						
+			  // types DwC
+			  triples.push(triple(sequence_id,
+				'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+				'http://purl.org/dsw/Token'));
+
+				// type this as a sequence (how?)
+			  triples.push(triple(sequence_id,
+				'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+				'http://purl.uniprot.org/core/Nucleotide_Resource'));
+								
+				if (doc.sequences.sequence[i].genbank_accession) {
+			 		 triples.push(triple(sequence_id,
+						'http://schema.org/sameAs',
+						'https://www.ncbi.nlm.nih.gov/nuccore/' + doc.sequences.sequence[i].genbank_accession));
+
+			 		 triples.push(triple(sequence_id,
+						'http://schema.org/sameAs',
+						'http://purl.uniprot.org/embl/' + doc.sequences.sequence[i].genbank_accession));
+					
+				}			
+			}
+		}
+	}
+	
+	// images
+	if (doc.specimen_imagery) {
+		if (doc.specimen_imagery.media) {
+			for (var i in doc.specimen_imagery.media) {
+				
+				// identifier
+				var media_id = base_id + '#media/' + doc.specimen_imagery.media[i].mediaID;
+				
+			  // link to data
+			  triples.push(triple(media_id,
+				'http://purl.org/dsw/derivedFrom',
+				organism_id));
+						
+			  triples.push(triple(media_id,
+				'http://schema.org/about',
+				organism_id));
+
+			  // types DwC
+			  triples.push(triple(media_id,
+				'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+				'http://purl.org/dsw/Token'));
+
+			// Schema
+			  triples.push(triple(media_id,
+				'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+				'http://schema.org/ImageObject'));
+				
+				
+				for (var k in doc.specimen_imagery.media[i]) {
+					switch (k) {
+					
+						case 'media_descriptor':
+							triples.push(
+								triple(media_id,
+								'http://schema.org/name',
+								doc.specimen_imagery.media[i][k]));							
+							break;
+					
+						case 'photographer':
+							triples.push(
+								triple(media_id,
+								'http://schema.org/creator',
+								doc.specimen_imagery.media[i][k]));							
+							break;
+							
+						case 'image_file':
+							triples.push(
+								triple(media_id,
+								'http://schema.org/contentUrl',
+								doc.specimen_imagery.media[i][k]));							
+							break;
+							
+					
+						default:
+							break;
+					}
+				
+				}
+			}
+		}	
+	}
+	
+	
+	// sequence
+	
+	
+				
+
+ /*   
+    // Darwin Core
+    for (var i in doc) {
+      if (doc[i]) {
+      
+         switch (i) {
+         
+          // specimen
+          // Darwin Core specimen---------------------------------------------------------
+        case 'catalogNumber':
+        case 'collectionCode':
+        case 'collectionID':
+        case 'institutionCode':
+        case 'institutionID':
+        case 'recordedBy':
+        case 'individualCount':
+        case 'organismQuantity':
+        case 'sex':
+        case 'lifeStage':
+        case 'reproductiveCondition':
+        case 'behavior':
+        //case 'establishmentMeans':
+        //case 'occurrenceStatus':
+        case 'preparations':
+        case 'disposition':
+        case 'otherCatalogNumbers':
+        case 'recordNumber':
+        //case 'occurrenceRemarks':
+
+          triples.push(triple(specimen_id,
+            'http://rs.tdwg.org/dwc/terms/' + i,
+            String(doc[i])));
+          break;
+         
+         
+			  // Darwin Core locality-----------------------------------------------------------
+			case 'continent':
+			case 'coordinateUncertaintyInM':
+			case 'coordinatePrecision':
+			case 'country':
+			case 'county':
+			case 'countryCode':
+			case 'decimalLatitude':
+			case 'decimalLongitude':
+			case 'depth':
+			case 'depthAccuracy':
+			case 'elevation':
+			case 'footprintWKT':
+			case 'footprintSRS':
+			case 'footprintSpatialFit':
+			case 'geodeticDatum':
+			case 'georeferencedBy':
+			case 'georeferencedDate':
+			case 'georeferenceSources':
+			case 'georeferenceProtocol':
+			case 'georeferenceVerification':
+			case 'georeferenceRemarks':
+			case 'higherGeography':
+			case 'higherGeographyID':
+			case 'island':
+			case 'islandGroup':
+			case 'locality':
+			case 'locationAccordingTo':
+			case 'locationID':
+			case 'locationRemarks':
+			case 'maximumElevationInMeters':
+			case 'minimumElevationInMeters':
+			case 'maximumDepthInMeters':
+			case 'minimumDepthInMeters':
+			case 'minimumDistanceAboveSurf':
+			case 'maximumDistanceAboveSurf':
+			case 'municipality':
+			case 'pointRadiusSpatialFit':
+			case 'stateProvince':
+			case 'verbatimCoordinates':
+			case 'verbatimLatitude':
+			case 'verbatimLongitude':
+			case 'verbatimCoordinateSystem':
+			case 'verbatimSRS':
+			case 'verbatimDepth':
+			case 'verbatimElevation':
+			case 'verbatimLocality':
+			case 'waterBody': 
+			  if (not_empty(String(doc[i]))) {
+			
+				  triples.push(triple(locality_id,
+					'http://rs.tdwg.org/dwc/terms/' + i,
+					String(doc[i])));
+				}
+				break;        
+                  
+ 			  // Darwin Core Event----------------------------------------------------------
+			case 'fieldNumber':
+			case 'eventDate':
+			case 'year':
+			case 'month':
+			case 'day':
+			case 'verbatimEventDate':
+			case 'fieldNotes':
+			case 'eventRemarks':
+			
+			  if (not_empty(String(doc[i]))) {
+			
+				  triples.push(triple(event_id,
+					'http://rs.tdwg.org/dwc/terms/' + i,
+					String(doc[i])));
+				}
+			  break;
+			  
+ 			  // Darwin Core Identification-----------------------------------------------
+        case "kingdom":
+        case "phylum":
+        case "order":
+        case "class":
+        case "family":
+        case "genus":
+        case "species":
+        case 'scientificName': // convenience
+
+			// identification
+			// https://github.com/tdwg/rdf/blob/master/DwcRdfGuideFinal.md#2.7.4_Description_of_a_taxonomic_entity.md
+        case 'typeStatus':
+        case 'identificationQualifier':
+        case 'typeStatus':
+        case 'identifiedBy':
+        case 'dateIdentified':
+        case 'identificationReferences':
+        case 'identificationVerificationStatus':
+        case 'identificationRemarks':
+
+          triples.push(triple(identification_id,
+            'http://rs.tdwg.org/dwc/terms/' + i,
+            String(doc[i])));
+          break;			
+          
+
+		// Some records have identifiers for taxon        
+        case 'taxonConceptID':
+        	if (doc[i].match(/urn:lsid:biodiversity.org.au:afd.taxon:/)) {
+        		triples.push(triple(identification_id,
+					'http://rs.tdwg.org/dwc/iri/toTaxon',
+		  			'https://bie.ala.org.au/species/' + doc.taxonConceptID));
+        	}
+			break;  
+			  
+			default:
+			 break;
+                 
+         }
+      }
+    }
+    
+    // Arrays
+
+	// media
+	// facts
+	// relations
+	// issues
+	// identifiers
+	// extensions
+    
+    // Images (model using schema.org)
+    if (doc.media) {
+    	for (var i in doc.media) {
+    		switch (doc.media[i].type) {
+            	case 'StillImage':
+            	
+					// identifier
+					var media_id = occurrence_id + '#media/' + (i + 1);
+					if (doc.media[i].identifier) {
+						media_id = doc.media[i].identifier;
+					}
+
+				  // link to data
+				  triples.push(triple(media_id,
+					'http://purl.org/dsw/derivedFrom',
+					organism_id));
+							
+				  triples.push(triple(media_id,
+					'http://schema.org/about',
+					organism_id));
+
+				  // types DwC
+				  triples.push(triple(media_id,
+					'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+					'http://purl.org/dsw/Token'));
+
+				// Schema
+				  triples.push(triple(media_id,
+					'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+					'http://schema.org/ImageObject'));
+				
+					for (var k in doc.media[i]) {
+					  switch(k) {
+						  case 'format':
+							triples.push(triple(media_id,
+							  'http://schema.org/fileFormat',
+							  doc.media[i][k]));
+							break;
+
+						  case 'title':
+							triples.push(triple(media_id,
+							  'http://schema.org/name',
+							  doc.media[i][k]));
+							break;
+
+						  case 'description':
+							triples.push(triple(media_id,
+							  'http://schema.org/caption',
+							  doc.media[i][k]));
+							break;
+							
+						  case 'references':
+							triples.push(triple(media_id,
+							  'http://schema.org/about',
+							  doc.media[i][k]));
+							break;							
+
+						  case 'identifier':
+							triples.push(triple(media_id,
+							  'http://schema.org/contentUrl',
+							  doc.media[i][k]));
+							break;
+
+						  case 'creator':
+							triples.push(triple(media_id,
+							  'http://schema.org/creator',
+							  doc.media[i][k]));
+							break;
+							
+						default:
+							break;
+						}
+					
+					}
+				
+					break;
+                
+            default:
+            	break;
+    		
+    		
+    		
+    		}
+    	}    
+    }
+    */
+    
+  
+    
+                
+    output(doc, triples);
+
+}
+
+function couchdb(doc) {
+
+	message(doc);
+   
+}
+// END COUCHDB VIEW
+
+		
+//----------------------------------------------------------------------------------------
+function convert() {
+	var json = $('#json').val();
+	var doc = JSON.parse(json);
+	
+	console.log(JSON.stringify(doc, null, 2));
+	
+	couchdb(doc);
+}
+
+	
+	</script>		
+			
+
+</div>
+</body>
+</html>			
