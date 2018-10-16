@@ -537,8 +537,14 @@ function message(doc) {
 		if (doc.sequences.sequence) {
 			for (var i in doc.sequences.sequence) {
 			
-			  var sequence_id = base_id + '#' + doc.processid + '.' + doc.sequences.sequence[i].markercode;
-				
+			  var sequence_name = doc.processid + '.' + doc.sequences.sequence[i].markercode;
+			
+			  var sequence_id = base_id + '#' + sequence_name;
+			  
+			  triples.push(triple(sequence_id,
+				'http://schema.org/name',
+				sequence_name));
+			  				
 			  // link to data
 			  triples.push(triple(sequence_id,
 				'http://purl.org/dsw/derivedFrom',
@@ -555,6 +561,11 @@ function message(doc) {
 				'http://purl.uniprot.org/core/Nucleotide_Resource'));
 								
 				if (doc.sequences.sequence[i].genbank_accession) {
+				
+			  		triples.push(triple(sequence_id,
+						'http://schema.org/alternateName',
+						doc.sequences.sequence[i].genbank_accession));
+								
 			 		 triples.push(triple(sequence_id,
 						'http://schema.org/sameAs',
 						'https://www.ncbi.nlm.nih.gov/nuccore/' + doc.sequences.sequence[i].genbank_accession));

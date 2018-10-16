@@ -17,7 +17,8 @@ if (1)
 //		'taxon' => 'Biomphalaria',
 		//'taxon' => 'Pristimantis',
 		//'taxon' => 'Oreobates',
-		'taxon' => 'Pingasa',
+		//'taxon' => 'Pingasa',
+		'taxon' => 'Acropteris teriadata',
 		'marker' => 'COI-5P',
 		'format' => 'json'
 		);	
@@ -66,6 +67,8 @@ else
 if ($data)
 {
 	//echo $data;
+	
+	//exit();
 	
 	$force = true;
 	
