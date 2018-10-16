@@ -287,6 +287,8 @@ function message(doc) {
 	  'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
 	  'http://rs.tdwg.org/dwc/terms/Identification'));
 	  
+	
+	  
 	  
 	// darwin core/rdf links 
 	
@@ -309,7 +311,11 @@ function message(doc) {
 	triples.push(triple(specimen_id,
 	  'http://purl.org/dsw/isBasisForId',
 	identification_id));
-	  
+	
+	
+ 
+    		
+ 	  
 	  
 	  // BIN is taxon id
 	if (doc.bin_uri) {
@@ -321,6 +327,17 @@ function message(doc) {
 	
 	// specimen
 	if (doc.specimen_identifiers) {
+	
+		triples.push(triple(
+			specimen_id,
+	  		'http://purl.org/dsw/evidenceFor',
+			occurrence_id));
+
+		triples.push(triple(
+		  specimen_id,
+		  'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+		  'http://purl.org/dsw/Specimen'));
+
 		for (var k in doc.specimen_identifiers) {
 			switch (k) {
 				case 'fieldnum':
@@ -617,259 +634,10 @@ function message(doc) {
 	// sequence
 	
 	
-				
 
- /*   
-    // Darwin Core
-    for (var i in doc) {
-      if (doc[i]) {
-      
-         switch (i) {
-         
-          // specimen
-          // Darwin Core specimen---------------------------------------------------------
-        case 'catalogNumber':
-        case 'collectionCode':
-        case 'collectionID':
-        case 'institutionCode':
-        case 'institutionID':
-        case 'recordedBy':
-        case 'individualCount':
-        case 'organismQuantity':
-        case 'sex':
-        case 'lifeStage':
-        case 'reproductiveCondition':
-        case 'behavior':
-        //case 'establishmentMeans':
-        //case 'occurrenceStatus':
-        case 'preparations':
-        case 'disposition':
-        case 'otherCatalogNumbers':
-        case 'recordNumber':
-        //case 'occurrenceRemarks':
-
-          triples.push(triple(specimen_id,
-            'http://rs.tdwg.org/dwc/terms/' + i,
-            String(doc[i])));
-          break;
-         
-         
-			  // Darwin Core locality-----------------------------------------------------------
-			case 'continent':
-			case 'coordinateUncertaintyInM':
-			case 'coordinatePrecision':
-			case 'country':
-			case 'county':
-			case 'countryCode':
-			case 'decimalLatitude':
-			case 'decimalLongitude':
-			case 'depth':
-			case 'depthAccuracy':
-			case 'elevation':
-			case 'footprintWKT':
-			case 'footprintSRS':
-			case 'footprintSpatialFit':
-			case 'geodeticDatum':
-			case 'georeferencedBy':
-			case 'georeferencedDate':
-			case 'georeferenceSources':
-			case 'georeferenceProtocol':
-			case 'georeferenceVerification':
-			case 'georeferenceRemarks':
-			case 'higherGeography':
-			case 'higherGeographyID':
-			case 'island':
-			case 'islandGroup':
-			case 'locality':
-			case 'locationAccordingTo':
-			case 'locationID':
-			case 'locationRemarks':
-			case 'maximumElevationInMeters':
-			case 'minimumElevationInMeters':
-			case 'maximumDepthInMeters':
-			case 'minimumDepthInMeters':
-			case 'minimumDistanceAboveSurf':
-			case 'maximumDistanceAboveSurf':
-			case 'municipality':
-			case 'pointRadiusSpatialFit':
-			case 'stateProvince':
-			case 'verbatimCoordinates':
-			case 'verbatimLatitude':
-			case 'verbatimLongitude':
-			case 'verbatimCoordinateSystem':
-			case 'verbatimSRS':
-			case 'verbatimDepth':
-			case 'verbatimElevation':
-			case 'verbatimLocality':
-			case 'waterBody': 
-			  if (not_empty(String(doc[i]))) {
-			
-				  triples.push(triple(locality_id,
-					'http://rs.tdwg.org/dwc/terms/' + i,
-					String(doc[i])));
-				}
-				break;        
-                  
- 			  // Darwin Core Event----------------------------------------------------------
-			case 'fieldNumber':
-			case 'eventDate':
-			case 'year':
-			case 'month':
-			case 'day':
-			case 'verbatimEventDate':
-			case 'fieldNotes':
-			case 'eventRemarks':
-			
-			  if (not_empty(String(doc[i]))) {
-			
-				  triples.push(triple(event_id,
-					'http://rs.tdwg.org/dwc/terms/' + i,
-					String(doc[i])));
-				}
-			  break;
-			  
- 			  // Darwin Core Identification-----------------------------------------------
-        case "kingdom":
-        case "phylum":
-        case "order":
-        case "class":
-        case "family":
-        case "genus":
-        case "species":
-        case 'scientificName': // convenience
-
-			// identification
-			// https://github.com/tdwg/rdf/blob/master/DwcRdfGuideFinal.md#2.7.4_Description_of_a_taxonomic_entity.md
-        case 'typeStatus':
-        case 'identificationQualifier':
-        case 'typeStatus':
-        case 'identifiedBy':
-        case 'dateIdentified':
-        case 'identificationReferences':
-        case 'identificationVerificationStatus':
-        case 'identificationRemarks':
-
-          triples.push(triple(identification_id,
-            'http://rs.tdwg.org/dwc/terms/' + i,
-            String(doc[i])));
-          break;			
-          
-
-		// Some records have identifiers for taxon        
-        case 'taxonConceptID':
-        	if (doc[i].match(/urn:lsid:biodiversity.org.au:afd.taxon:/)) {
-        		triples.push(triple(identification_id,
-					'http://rs.tdwg.org/dwc/iri/toTaxon',
-		  			'https://bie.ala.org.au/species/' + doc.taxonConceptID));
-        	}
-			break;  
-			  
-			default:
-			 break;
-                 
-         }
-      }
-    }
-    
-    // Arrays
-
-	// media
-	// facts
-	// relations
-	// issues
-	// identifiers
-	// extensions
-    
-    // Images (model using schema.org)
-    if (doc.media) {
-    	for (var i in doc.media) {
-    		switch (doc.media[i].type) {
-            	case 'StillImage':
-            	
-					// identifier
-					var media_id = occurrence_id + '#media/' + (i + 1);
-					if (doc.media[i].identifier) {
-						media_id = doc.media[i].identifier;
-					}
-
-				  // link to data
-				  triples.push(triple(media_id,
-					'http://purl.org/dsw/derivedFrom',
-					organism_id));
-							
-				  triples.push(triple(media_id,
-					'http://schema.org/about',
-					organism_id));
-
-				  // types DwC
-				  triples.push(triple(media_id,
-					'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-					'http://purl.org/dsw/Token'));
-
-				// Schema
-				  triples.push(triple(media_id,
-					'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-					'http://schema.org/ImageObject'));
-				
-					for (var k in doc.media[i]) {
-					  switch(k) {
-						  case 'format':
-							triples.push(triple(media_id,
-							  'http://schema.org/fileFormat',
-							  doc.media[i][k]));
-							break;
-
-						  case 'title':
-							triples.push(triple(media_id,
-							  'http://schema.org/name',
-							  doc.media[i][k]));
-							break;
-
-						  case 'description':
-							triples.push(triple(media_id,
-							  'http://schema.org/caption',
-							  doc.media[i][k]));
-							break;
-							
-						  case 'references':
-							triples.push(triple(media_id,
-							  'http://schema.org/about',
-							  doc.media[i][k]));
-							break;							
-
-						  case 'identifier':
-							triples.push(triple(media_id,
-							  'http://schema.org/contentUrl',
-							  doc.media[i][k]));
-							break;
-
-						  case 'creator':
-							triples.push(triple(media_id,
-							  'http://schema.org/creator',
-							  doc.media[i][k]));
-							break;
-							
-						default:
-							break;
-						}
-					
-					}
-				
-					break;
-                
-            default:
-            	break;
-    		
-    		
-    		
-    		}
-    	}    
-    }
-    */
     
   
-    
-                
+    // output                
     output(doc, triples);
 
 }
