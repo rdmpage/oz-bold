@@ -234,7 +234,7 @@ function message(doc) {
 	}
 	
 	// location
-    var locality_id = base_id + '#location';
+    var location_id = base_id + '#location';
 
 	// occurrence
 	var occurrence_id = base_id + '#occurrence';
@@ -267,7 +267,7 @@ function message(doc) {
 	  'http://rs.tdwg.org/dwc/terms/Occurrence'));
 	  
 	triples.push(triple(
-	  locality_id,
+	  location_id,
 	  'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
 	  'http://purl.org/dc/terms/Location'));
 	  
@@ -298,7 +298,7 @@ function message(doc) {
 
 	triples.push(triple(event_id,
 	  'http://purl.org/dsw/locatedAt',
-	  locality_id));
+	  location_id));
 
 	triples.push(triple(occurrence_id,
 	  'http://purl.org/dsw/occurrenceOf',
@@ -313,9 +313,12 @@ function message(doc) {
 	identification_id));
 	
 	
+	// default names for each entity
+	var event_name 			= 'Event';
+	var location_name 		= 'Location';
+	var identification_name = 'Identification'; 
+	var identification_name = doc.bin_uri;
  
-    		
- 	  
 	  
 	  // BIN is taxon id
 	if (doc.bin_uri) {
@@ -421,41 +424,44 @@ function message(doc) {
 				// locality
 				
 				case 'elev':
-					triples.push(triple(locality_id,
+					triples.push(triple(location_id,
 					'http://rs.tdwg.org/dwc/terms/minimumElevationInMeters',
 					doc.collection_event[k]));	
 							
-					triples.push(triple(locality_id,
+					triples.push(triple(location_id,
 					'http://rs.tdwg.org/dwc/terms/maximumElevationInMeters',
 					doc.collection_event[k]));			
 					break;				
 				
 				case 'country':
-					triples.push(triple(locality_id,
+					triples.push(triple(location_id,
 					'http://rs.tdwg.org/dwc/terms/country',
 					doc.collection_event[k]));			
 					break;
 					
 				case 'province_state':
-					triples.push(triple(locality_id,
+					triples.push(triple(location_id,
 					'http://rs.tdwg.org/dwc/terms/stateProvince',
 					doc.collection_event[k]));			
 					break;
 
 				case 'exactsite':
-					triples.push(triple(locality_id,
+					triples.push(triple(location_id,
 					'http://rs.tdwg.org/dwc/terms/locality',
-					doc.collection_event[k]));			
+					doc.collection_event[k]));	
+					
+					location_name = doc.collection_event[k];
+							
 					break;
 					
 				case 'coordinates':
 					if (doc.collection_event[k].lat) {
-						triples.push(triple(locality_id,
+						triples.push(triple(location_id,
 						'http://rs.tdwg.org/dwc/terms/decimalLatitude',
 						doc.collection_event[k].lat));								
 					}
 					if (doc.collection_event[k].lon) {
-						triples.push(triple(locality_id,
+						triples.push(triple(location_id,
 						'http://rs.tdwg.org/dwc/terms/decimalLongitude',
 						doc.collection_event[k].lon));								
 					}
@@ -530,6 +536,22 @@ function message(doc) {
 		
 		}
 	}	
+	
+    // names for entities
+    triples.push(triple(event_id,
+	  'http://schema.org/name',
+	  event_name));
+	
+
+	triples.push(triple(location_id,
+	  'http://schema.org/name',
+	  location_name));
+	
+
+	triples.push(triple(identification_id,
+	  'http://schema.org/name',
+	  identification_name));
+	
 	
 	
 	// sequences
